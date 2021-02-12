@@ -1,0 +1,99 @@
+Esercizi 4 e 5 delle trasparenze 030-pseudocodifica
+
+========================================================
+POSITIVO(A) // A è un array di interi, verifichiamo che tutti
+            // gli elementi siano maggiori di zero
+
+    tutti_positivi = TRUE  // tutti i valori controllati fin qui
+                           // sono maggiori di zero
+    for i = 0 to A.length-1
+    	if A[i] <= 0 then
+    		tutti_positivi = FALSE
+
+    return tutti_positivi
+========================================================
+POSITIVO(A) // variante con il while
+
+	tutti_positivi = TRUE 
+	i = 0
+	while (i < A.length && tutti_positivi) do
+		if A[i] <= 0 then
+			tutti_positivi = FALSE
+		i = i+1
+
+	return tutti_positivi
+========================================================
+POSITIVO(A) // altra variante con il while
+
+	tutti_positivi = TRUE 
+	i = 0
+	while (i < A.length && tutti_positivi) do
+		if A[i] > 0 then
+			i = i+1
+		else
+			tutti_positivi = FALSE
+	return tutti_positivi
+========================================================
+POSITIVO(A) // versione senza varibile "di accumulazione"
+
+    for i = 0 to A.length-1
+    	if A[i] <= 0 then
+    		return FALSE
+
+    return TRUE
+========================================================
+POSIZIONE_MASSIMO(A)  /* A è un array di interi.
+                         Ritorna in output la posizione del massimo
+                         e il valore massimo. */
+    /* "output" è un oggetto con due campi interi "indice" e "max" */
+
+    output.indice = 0     // valori provvisori del massimo
+    output.max = A[0]
+
+    for i=1 to A.length-1
+    	if A[i] > output.max
+    		output.max = A[i]
+    		output.indice = i
+
+    return output
+========================================================
+POSIZIONE_MASSIMO(A)  // versione alternativa
+	
+	/* B è un array di due interi: B[0] è l'indice e B[1] è il valore */
+
+	B[0] = 0     // inizializzo l'indice
+	B[1] = A[0]  // inizializzo il max provvisorio
+
+	for i=1 to A.length-1
+		if A[i] > B[1]
+			B[0] = i
+			B[1] = A[i]
+
+	return B
+========================================================	
+// versione in C per la riflessione su stack/heap
+
+int* POSIZIONE_MASSIMO(int* A, int size) {
+	
+	int* B = (int*)calloc(2,sizeof(int));  /* non possiamo fare
+                                              int B[size]; perche'
+                                              altrimenti l'array
+                                              verrebbe cancellato 
+                                              all'uscita. */
+
+	B[0] = 0;
+	B[1] = A[0];
+
+	int i;
+	for( i = 0; i < size; i++) {
+		if (A[i] > B[1]) {
+			B[0] = i;
+			B[1] = A[i];
+		}
+	}
+	return B;
+}
+
+    
+
+
